@@ -1,0 +1,50 @@
+.panel {
+    background: #122;
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    margin-top: 30px;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+label {
+    display: block;
+    margin: 14px 0 6px;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    background: #1a1a1a;
+    border-radius: 8px;
+    border: none;
+    color: #fff;
+    font-family: inherit;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+button {
+    margin-top: 16px;
+    padding: 12px 18px;
+    border-radius: 8px;
+    border: none;
+    background: #133;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.settings-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 12px;
+}
