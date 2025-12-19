@@ -174,10 +174,19 @@
     max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
+    transform: translateY(0);
+    transition:
+        transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+        background 0.25s ease;
 }
 
 .buttons button {
     background: #133;
+}
+
+.buttons button:hover,
+.buttons a:hover {
+    transform: translateY(-3px);
 }
 
 .player {
