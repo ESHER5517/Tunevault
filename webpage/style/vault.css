@@ -1,4 +1,3 @@
-/* Search */
 .search {
     margin-top: clamp(72px, 14vw, 96px);
     margin-bottom: var(--space-md);
@@ -7,6 +6,7 @@
 .search label {
     font-size: clamp(14px, 4vw, 18px);
     margin-bottom: var(--space-xs);
+    display: block;
 }
 
 .search-field {
@@ -26,9 +26,12 @@
 }
 
 .search input {
+    width: 100%;
     padding: var(--space-sm) var(--space-sm) var(--space-sm) 42px;
     background: #122;
     border-radius: var(--radius-md);
+    border: none;
+    color: #fff;
     font-size: clamp(14px, 3.5vw, 16px);
     white-space: nowrap;
     overflow: hidden;
@@ -39,7 +42,6 @@
     outline: none;
 }
 
-/* Accordion / Artist */
 .accordion {
     margin-top: var(--space-md);
 }
@@ -98,7 +100,6 @@
     border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Button groups */
 .buttons {
     margin-top: var(--space-md);
     display: flex;
@@ -108,19 +109,33 @@
 
 .buttons button,
 .buttons a {
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
     background: #121212;
+    color: #fff;
+    border: none;
+    text-decoration: none;
     font-size: clamp(14px, 3vw, 16px);
+    cursor: pointer;
     white-space: nowrap;
     max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
+    transform: translateY(0);
+    transition:
+        transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+        background 0.25s ease;
 }
 
 .buttons button {
     background: #133;
 }
 
-/* Player */
+.buttons button:hover,
+.buttons a:hover {
+    transform: translateY(-3px);
+}
+
 .player {
     position: fixed;
     bottom: var(--space-sm);
@@ -169,6 +184,7 @@
 
 #currentTime,
 #duration {
+    flex: 0 0 auto;
     white-space: nowrap;
 }
 
@@ -182,7 +198,6 @@
     min-width: 48px;
 }
 
-/* Responsive */
 @media (max-width: 600px) {
     .artist img {
         display: none;
