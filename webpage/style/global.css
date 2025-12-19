@@ -1,0 +1,63 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #111;
+    color: #eee;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.titlebar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 24px;
+}
+
+.nav {
+    display: flex;
+    gap: 12px;
+}
+
+.icon {
+    position: relative;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #2a2a2a;
+    border-radius: 12px;
+}
+
+.icon img {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    filter: invert(1);
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
+}
+
+.icon img.regular {
+    opacity: 0;
+    transform: translateY(0);
+}
+
+.icon img.solid {
+    transform: translateY(0);
+}
+
+.icon:hover img.solid {
+    opacity: 0;
+    transform: translateY(-3px);
+}
+
+.icon:hover img.regular {
+    opacity: 1;
+    transform: translateY(-3px);
+}
