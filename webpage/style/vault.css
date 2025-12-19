@@ -133,7 +133,6 @@ body {
 .decade.open .decade-content {
     max-height: 2000px;
     opacity: 1;
-    margin-top: var(--space-md);
 }
 
 /* Artist Accordion Styles (nested within decades) */
@@ -205,7 +204,6 @@ body {
 .artist.open .artist-content {
     max-height: 500px;
     opacity: 1;
-    margin-top: var(--space-md);
 }
 
 .artist img {
