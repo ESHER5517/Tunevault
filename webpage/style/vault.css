@@ -65,7 +65,6 @@
 }
 
 .artist:hover {
-    transform: translateY(-3px);
     background: #202020;
 }
 
@@ -74,11 +73,6 @@
     font-weight: bold;
     cursor: pointer;
     transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.artist-header:hover {
-    opacity: 0.7;
-    transform: translateY(-1px);
 }
 
 .artist-meta {
