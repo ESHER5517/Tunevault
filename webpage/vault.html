@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>MuseVault – Vault</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/vault.js" defer></script>
+    <link rel="stylesheet" href="style/vault.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="titlebar">
+            <h1>Vault</h1>
+            <div class="nav">
+                <a href="#" class="icon">
+                    <img class="solid" src="icons/solid/home.svg" alt="Index">
+                    <img class="regular" src="icons/regular/home.svg" alt="Index">
+                </a>
+                <a href="#" class="icon">
+                    <img class="solid" src="icons/solid/file-audio.svg" alt="Vault">
+                    <img class="regular" src="icons/regular/file-audio.svg" alt="Vault">
+                </a>
+                <a href="#" class="icon">
+                    <img class="solid" src="icons/solid/gear.svg" alt="Dashboard">
+                    <img class="regular" src="icons/regular/sun.svg" alt="Dashboard">
+                </a>
+            </div>
+        </div>
+
+        <div class="search">
+            <label for="searchInput">Search artists</label>
+            <input type="text" id="searchInput" placeholder="Type an artist name...">
+        </div>
+
+        <div class="accordion" id="artistList">
+
+            <div class="artist" data-audio="audio/yuno-miles.mp3">
+                <div class="artist-header">Yuno Miles ▾</div>
+                <img src="images/unknown-artist-default-32px.jpg" alt="Unknown">
+                <div class="artist-content">
+                    <div class="artist-meta">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+                    </div>
+                    <div class="buttons">
+                        <button onclick="playArtist(this)">Play</button>
+                        <a href="https://en.wikipedia.org" target="_blank">Wiki</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="artist" data-audio="audio/unknown.mp3">
+                <div class="artist-header">Unknown ▾</div>
+                <img src="images/unknown-artist-default-32px.jpg" alt="Unknown">
+                <div class="artist-content">
+                    <div class="artist-meta">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+                    </div>
+                    <div class="buttons">
+                        <button onclick="playArtist(this)">Play</button>
+                        <a href="https://en.wikipedia.org" target="_blank">Wiki</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="player">
+        <div style="display:flex;align-items:center;gap:16px;width:100%;">
+
+            <button id="playPauseBtn"
+                style="background:none;border:none;padding:0;cursor:pointer;display:flex;align-items:center;">
+                <img id="playPauseIcon" src="icons/solid/play-circle.svg" alt="Play"
+                    style="width:20px;height:20px;filter:invert(1);">
+            </button>
+
+            <span id="trackLabel" style="font-size:12px;color:#eee;white-space:nowrap;">
+                Title<!--hey siri, play me some of that jumping music-->
+            </span>
+
+            <span id="currentTime" style="font-size:11px;color:#eee;white-space:nowrap;">
+                0:00
+            </span>
+
+            <input id="progress" type="range" min="0" step="any" value="0" style="flex:1;">
+
+            <span id="duration" style="font-size:11px;color:#eee;white-space:nowrap;">
+                0:00
+            </span>
+
+            <input id="volume" type="range" min="0" max="1" step="0.01" value="1" style="width:73px;">
+        </div>
+
+        <audio id="audio"></audio>
+    </div>
+
+</body>
+
+</html>
