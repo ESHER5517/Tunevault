@@ -1,5 +1,5 @@
 .search {
-    margin: 40px 0 20px;
+    margin: 40px 0 12px;
 }
 
 .search label {
@@ -14,7 +14,7 @@
 
 .search-icon {
     position: absolute;
-    left: 14px;
+    left: 12px;
     top: 50%;
     width: 16px;
     height: 16px;
@@ -27,7 +27,7 @@
 
 .search input {
     width: 100%;
-    padding: 14px 14px 14px 42px;
+    padding: 12px 12px 12px 42px;
     border: none;
     border-radius: 10px;
     background: #1c1c1c;
@@ -49,15 +49,15 @@
 }
 
 .accordion {
-    margin-top: 20px;
+    margin-top: 12px;
 }
 
 .artist {
     position: relative;
-    padding: 20px;
-    margin-bottom: 20px;
+    padding: 12px;
+    margin-bottom: 12px;
     background: #1c1c1c;
-    border-radius: 14px;
+    border-radius: 12px;
     transform: translateY(0);
     transition:
         transform 0.45s cubic-bezier(0.25, 0.8, 0.25, 1),
@@ -65,11 +65,11 @@
 }
 
 .artist:hover {
-    background: #202020;
+    background: #222;
 }
 
 .artist-header {
-    font-size: 20px;
+    font-size: 12px;
     font-weight: bold;
     cursor: pointer;
     transition: opacity 0.3s ease, transform 0.3s ease;
@@ -84,8 +84,8 @@
 
 .artist-content {
     display: none;
-    margin-top: 14px;
-    padding-top: 14px;
+    margin-top: 12px;
+    padding-top: 12px;
 }
 
 .artist img {
@@ -105,7 +105,7 @@
 }
 
 .buttons {
-    margin-top: 20px;
+    margin-top: 12px;
 }
 
 .buttons button,
@@ -144,15 +144,15 @@
 
 .player {
     position: fixed;
-    bottom: 20px;
+    bottom: 12px;
     left: 50%;
     width: 90%;
     padding: 15px;
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 12px;
     background: #1c1c1c;
-    border-radius: 14px;
+    border-radius: 12px;
     opacity: 0;
     pointer-events: none;
     transform: translateX(-50%) translateY(12px);
@@ -180,23 +180,30 @@ input[type="range"] {
     transition: filter 0.3s ease;
 }
 
-input[type="range"]:hover {
-    filter: brightness(1.2);
-}
-
-input[type="range"]::-webkit-slider-thumb,
-input[type="range"]::-moz-range-thumb {
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
     width: 12px;
     height: 12px;
-    background: #fff;
+    background: #ffffff;
     border-radius: 50%;
     border: none;
     cursor: pointer;
-    transform: scale(1);
-    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-input[type="range"]:active::-webkit-slider-thumb,
-input[type="range"]:active::-moz-range-thumb {
-    transform: scale(1.25);
+input[type="range"]::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    background: #ffffff;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+input[type="range"]::-ms-thumb {
+    width: 12px;
+    height: 12px;
+    background: #ffffff;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
 }
