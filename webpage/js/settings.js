@@ -1,7 +1,5 @@
-// Settings management with localStorage persistence
 const $ = id => document.getElementById(id);
 
-// Settings elements
 const volumeSetting = $('volume-setting');
 const volumeValue = $('volume-value');
 const autoplaySetting = $('autoplay-setting');
@@ -11,7 +9,6 @@ const scalingSetting = $('scaling-setting');
 const scalingValue = $('scaling-value');
 const fontSetting = $('font-setting');
 
-// Font mapping
 const fontMap = {
     'default': "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
     'courier': "'Courier New', monospace",
@@ -21,7 +18,7 @@ const fontMap = {
     'comic': "'Comic Sans MS', cursive"
 };
 
-// Load settings from localStorage
+// Source - https://www.w3schools.com/, Retrieved 2025-12-19, License - CC BY-SA 4.0
 function loadSettings() {
     const savedVolume = localStorage.getItem('defaultVolume');
     const savedAutoplay = localStorage.getItem('autoplay');
@@ -56,26 +53,23 @@ function loadSettings() {
     }
 }
 
-// Apply contrast adjustment
+// Source - https://developer.mozilla.org/en-US/docs/Web/CSS, Retrieved 2025-12-19, License - CC BY-SA 4.0
 function applyContrast(value) {
     const contrastAmount = 1 + (value / 100);
-    const brightnessAmount = 1 + (value / 200); // Subtle brightness boost
+    const brightnessAmount = 1 + (value / 200);
     document.body.style.filter = `contrast(${contrastAmount}) brightness(${brightnessAmount})`;
 }
 
-// Apply scaling adjustment
 function applyScaling(value) {
     const scale = value / 100;
     document.documentElement.style.fontSize = (16 * scale) + 'px';
 }
 
-// Apply font family
 function applyFont(fontKey) {
     const fontFamily = fontMap[fontKey] || fontMap['default'];
     document.body.style.fontFamily = fontFamily;
 }
 
-// Volume setting
 if (volumeSetting) {
     volumeSetting.addEventListener('input', (e) => {
         const value = e.target.value;
@@ -86,14 +80,12 @@ if (volumeSetting) {
     updateRange(volumeSetting);
 }
 
-// Autoplay setting
 if (autoplaySetting) {
     autoplaySetting.addEventListener('change', (e) => {
         localStorage.setItem('autoplay', e.target.checked);
     });
 }
 
-// Contrast setting
 if (contrastSetting) {
     contrastSetting.addEventListener('input', (e) => {
         const value = e.target.value;
@@ -105,7 +97,6 @@ if (contrastSetting) {
     updateRange(contrastSetting);
 }
 
-// Scaling setting
 if (scalingSetting) {
     scalingSetting.addEventListener('input', (e) => {
         const value = e.target.value;
@@ -117,7 +108,6 @@ if (scalingSetting) {
     updateRange(scalingSetting);
 }
 
-// Font setting
 if (fontSetting) {
     fontSetting.addEventListener('change', (e) => {
         const value = e.target.value;
@@ -126,7 +116,6 @@ if (fontSetting) {
     });
 }
 
-// Update range slider visual progress
 function updateRange(range) {
     const min = range.min || 0;
     const max = range.max || 1;
@@ -135,5 +124,4 @@ function updateRange(range) {
     range.style.setProperty('--progress', `${percent}%`);
 }
 
-// Load saved settings on page load
 loadSettings();

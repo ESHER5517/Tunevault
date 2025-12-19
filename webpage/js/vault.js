@@ -12,10 +12,8 @@ const searchInput = $('searchInput');
 const searchStatus = $('search-status');
 const player = document.querySelector('.player');
 
-// Store last focused element for modal focus management
 let lastFocusedElement = null;
 
-// Decade accordion functionality
 document.querySelectorAll('.decade-header').forEach(header => {
     header.addEventListener('click', () => {
         const decade = header.closest('.decade');
@@ -33,20 +31,16 @@ document.querySelectorAll('.decade-header').forEach(header => {
     });
 });
 
-// Artist accordion functionality with accessibility
 document.querySelectorAll('.artist-header').forEach(header => {
     header.addEventListener('click', () => {
         const artist = header.closest('.artist');
         const isOpen = artist.classList.contains('open');
 
-        // Toggle open state
         artist.classList.toggle('open');
 
-        // Update ARIA attribute
         header.setAttribute('aria-expanded', !isOpen);
     });
 
-    // Keyboard support
     header.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
@@ -55,7 +49,6 @@ document.querySelectorAll('.artist-header').forEach(header => {
     });
 });
 
-// Modal image functionality
 const modal = document.getElementById('imageModal');
 const modalImg = document.getElementById('modalImage');
 const modalCaption = document.getElementById('modalCaption');
@@ -64,7 +57,6 @@ const modalDecade = document.getElementById('modalDecade');
 const closeModal = document.querySelector('.modal-close');
 const modalWrapper = document.querySelector('.modal-content-wrapper');
 
-// Get all focusable elements in modal
 const getFocusableElements = () => {
     return modalWrapper.querySelectorAll(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
@@ -104,13 +96,11 @@ document.querySelectorAll('.artist-img-modal').forEach(img => {
 
         document.body.style.overflow = 'hidden'; // Prevent background scroll
 
-        // Focus close button
         closeModal.focus();
     };
 
     img.addEventListener('click', openModalHandler);
 
-    // Keyboard support for images
     img.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
@@ -133,13 +123,13 @@ const closeModalHandler = () => {
 
 closeModal.addEventListener('click', closeModalHandler);
 
-// Close on outside click
 modal.addEventListener('click', (e) => {
     if (e.target === modal) {
         closeModalHandler();
     }
 });
 
+// Source - https://stackoverflow.com/, Retrieved 2025-12-19, License - CC BY-SA 4.0
 // Focus trap for modal
 modal.addEventListener('keydown', (e) => {
     if (!modal.classList.contains('show')) return;
@@ -227,7 +217,6 @@ searchInput.addEventListener('input', () => {
     let visibleDecadesCount = 0;
 
     document.querySelectorAll('.decade').forEach(decade => {
-        // Get decade name from the first span in decade-header
         const decadeHeader = decade.querySelector('.decade-header span:first-child');
         const decadeName = decadeHeader ? decadeHeader.textContent.toLowerCase() : '';
         const decadeMatches = decadeName.includes(filter);
@@ -235,12 +224,10 @@ searchInput.addEventListener('input', () => {
         let hasVisibleArtist = false;
 
         decade.querySelectorAll('.artist').forEach(artist => {
-            // Get artist name from the first span in artist-header
             const artistHeader = artist.querySelector('.artist-header span:first-child');
             const artistName = artistHeader ? artistHeader.textContent.toLowerCase() : '';
             const artistMatches = artistName.includes(filter);
 
-            // Show artist if it matches OR if the decade category matches
             const shouldShow = artistMatches || decadeMatches || filter === '';
             artist.style.display = shouldShow ? '' : 'none';
             if (shouldShow) {
@@ -249,12 +236,10 @@ searchInput.addEventListener('input', () => {
             }
         });
 
-        // Show decade if it contains matching artists or matches itself
         const shouldShowDecade = (hasVisibleArtist || filter === '');
         decade.style.display = shouldShowDecade ? '' : 'none';
         if (shouldShowDecade) visibleDecadesCount++;
 
-        // Auto-expand decade if searching and it has matches
         if (filter !== '' && hasVisibleArtist) {
             decade.classList.add('open');
             const header = decade.querySelector('.decade-header');

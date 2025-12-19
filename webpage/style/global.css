@@ -84,6 +84,7 @@ body {
     transform: translateY(-3px);
 }
 
+/* Source - https://www.w3schools.com/, Retrieved 2025-12-19, License - CC BY-SA 4.0 */
 input[type="range"] {
     appearance: none;
     height: 6px;
@@ -104,7 +105,6 @@ input[type="range"]::-webkit-slider-thumb {
     border: none;
 }
 
-/* Retro Color Palette */
 :root {
     --retro-cyan: #0ff;
     --retro-magenta: #f0f;
@@ -113,7 +113,6 @@ input[type="range"]::-webkit-slider-thumb {
     --retro-orange: #f90;
 }
 
-/* Retro scan lines effect - applies to all pages */
 body::before {
     content: '';
     position: fixed;
@@ -131,7 +130,6 @@ body::before {
     opacity: 0.3;
 }
 
-/* Visually hidden utility class for accessibility */
 .visually-hidden {
     position: absolute;
     width: 1px;
@@ -144,7 +142,6 @@ body::before {
     border: 0;
 }
 
-/* Skip to main content link */
 .skip-link {
     position: absolute;
     top: -100px;
@@ -167,7 +164,6 @@ body::before {
     outline-offset: 2px;
 }
 
-/* Enhanced focus indicators with retro theme */
 a:focus,
 button:focus,
 input:focus,
@@ -179,7 +175,6 @@ select:focus,
     box-shadow: 0 0 0 4px rgba(0, 255, 255, 0.3);
 }
 
-/* Focus visible (keyboard navigation only) */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
@@ -192,7 +187,6 @@ select:focus-visible {
         0 0 20px rgba(255, 0, 255, 0.6);
 }
 
-/* Remove focus styles for mouse users */
 a:focus:not(:focus-visible),
 button:focus:not(:focus-visible),
 input:focus:not(:focus-visible),
@@ -202,7 +196,6 @@ select:focus:not(:focus-visible) {
     box-shadow: none;
 }
 
-/* Navigation icon focus states */
 .icon:focus {
     outline: 2px solid var(--retro-cyan);
     outline-offset: 4px;
