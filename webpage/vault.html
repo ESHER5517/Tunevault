@@ -5,17 +5,11 @@
     <meta charset="UTF-8">
     <title>Tunevault</title>
 
-    <!--
-    Source - https://stackoverflow.com/a
-    Posted by serraosays, modified by community. See post 'Timeline' for change history
-    Retrieved 2025-12-19, License - CC BY-SA 4.0
-    -->
-
     <link rel="icon" href="favicon.svg" sizes="any" type="image/svg+xml">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <script src="js/vault.js" defer></script>
+    <script src="js/settings.js" defer></script>
 
     <link rel="stylesheet" href="style/global.css">
     <link rel="stylesheet" href="style/vault.css">
@@ -23,80 +17,283 @@
 
 <body>
     <div class="container">
+        <div id="imageModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <span class="modal-close" aria-label="Close modal">&times;</span>
+            <img class="modal-content" id="modalImage" alt="">
+            <div id="modalCaption"></div>
+        </div>
+
         <div class="titlebar">
-            <div class="nav">
-                <a href="index.html" class="icon">
-                    <img class="solid" src="icons/solid/home.svg" alt="Index">
-                    <img class="regular" src="icons/regular/home.svg" alt="Index">
+            <nav class="nav" aria-label="Main navigation">
+                <a href="index.html" class="icon" aria-label="Home page">
+                    <img class="solid" src="icons/solid/home.svg" alt="" aria-hidden="true">
+                    <img class="regular" src="icons/regular/home.svg" alt="" aria-hidden="true">
                 </a>
-                <a href="vault.html" class="icon">
-                    <img class="solid" src="icons/solid/file-audio.svg" alt="Vault">
-                    <img class="regular" src="icons/regular/file-audio.svg" alt="Vault">
+                <a href="vault.html" class="icon" aria-label="Artist vault">
+                    <img class="solid" src="icons/solid/file-audio.svg" alt="" aria-hidden="true">
+                    <img class="regular" src="icons/regular/file-audio.svg" alt="" aria-hidden="true">
                 </a>
-                <a href="contact.html" class="icon">
-                    <img class="solid" src="icons/solid/gear.svg" alt="Dashboard">
-                    <img class="regular" src="icons/regular/sun.svg" alt="Dashboard">
+                <a href="contact.html" class="icon" aria-label="Contact and settings">
+                    <img class="solid" src="icons/solid/gear.svg" alt="" aria-hidden="true">
+                    <img class="regular" src="icons/regular/sun.svg" alt="" aria-hidden="true">
                 </a>
-            </div>
+            </nav>
         </div>
-        <div class="search">
-            <div class="search-field">
-                <input id="searchInput" type="text" placeholder="Type an artist name...">
-                <img class="search-icon" src="icons/solid/search.svg" alt="">
-            </div>
-        </div>
-        <div class="accordion" id="artistList">
-            <div class="artist">
-                <div class="artist-header">Justin Bieber ▾</div>
-                <img src="images/justin-bieber/profile-photo.jpg" alt="Unknown">
-                <div class="artist-content">
-                    <div class="artist-meta">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit...
-                    </div>
-                    <div class="buttons">
-                        <button onclick="playArtist(this, 'audio/justin-bieber/i-feel-funny.mp3')">I Feel Funny</button>
-                        <a href="https://en.wikipedia.org/wiki/Justin_Bieber" target="_blank">Wiki</a>
-                    </div>
+
+        <main id="main-content">
+            <div class="search">
+                <label for="searchInput" class="visually-hidden">Search for artists</label>
+                <div class="search-field">
+                    <input id="searchInput" type="text" placeholder="Search by artist or decade..."
+                        aria-label="Search for artists by name or decade">
+                    <img class="search-icon" src="icons/solid/search.svg" alt="" aria-hidden="true">
                 </div>
             </div>
-            <div class="artist">
-                <div class="artist-header">ROBLOX Hater 9000 ▾</div>
-                <img src="images/robloxhater9000/profile-photo.jpg" alt="Unknown">
-                <div class="artist-content">
-                    <div class="artist-meta">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit...
-                    </div>
-                    <div class="buttons">
-                        <button onclick="playArtist(this, 'audio/robloxhater9000/roblox-hate.mp3')">Roblox Hate</button>
-                        <button onclick="playArtist(this, 'audio/robloxhater9000/raining-tacos.mp3')">Raining
-                            Tacos</button>
-                        <a href="https://en.wikipedia.org/wiki/Rage-baiting" target="_blank">Wiki</a>
+
+            <div class="decades" role="region" aria-label="Decades">
+
+                <!-- 2010s Decade -->
+                <div class="decade" role="article">
+                    <button class="decade-header" aria-expanded="false" aria-controls="decade-2010s">
+                        <span>2010s</span>
+                        <span class="arrow" aria-hidden="true">▾</span>
+                    </button>
+                    <div class="decade-content" id="decade-2010s">
+                        <div class="artist" role="article">
+                            <button class="artist-header" aria-expanded="false" aria-controls="artist-content-1">
+                                <span>Justin Bieber</span>
+                                <span class="arrow" aria-hidden="true">▾</span>
+                            </button>
+                            <img src="images/justin-bieber/profile-photo.jpg" alt="Justin Bieber profile photo"
+                                class="artist-img-modal" tabindex="0" role="button"
+                                aria-label="View Justin Bieber profile photo in full size">
+                            <div class="artist-content" id="artist-content-1">
+                                <div class="artist-meta">
+                                    Canadian pop star who rose to fame in 2009 with "Baby" and became one of the biggest
+                                    teen idols of the 2010s.
+                                </div>
+                                <div class="buttons">
+                                    <button onclick="playArtist(this, 'audio/justin-bieber/i-feel-funny.mp3')"
+                                        aria-label="Play I Feel Funny by Justin Bieber">I Feel Funny</button>
+                                    <a href="https://en.wikipedia.org/wiki/Justin_Bieber" target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="Read about Justin Bieber on Wikipedia (opens in new tab)">Wiki</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="artist" role="article">
+                            <button class="artist-header" aria-expanded="false" aria-controls="artist-content-7">
+                                <span>Lady Gaga</span>
+                                <span class="arrow" aria-hidden="true">▾</span>
+                            </button>
+                            <img src="images/unknown-artist-default-32px.jpg" alt="Lady Gaga profile photo"
+                                class="artist-img-modal" tabindex="0" role="button"
+                                aria-label="View Lady Gaga profile photo in full size">
+                            <div class="artist-content" id="artist-content-7">
+                                <div class="artist-meta">
+                                    Pop icon known for theatrical performances and hits like "Poker Face" and "Bad
+                                    Romance" that defined the late 2000s and early 2010s.
+                                </div>
+                                <div class="buttons">
+                                    <a href="https://en.wikipedia.org/wiki/Lady_Gaga" target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="Read about Lady Gaga on Wikipedia (opens in new tab)">Wiki</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="artist" role="article">
+                            <button class="artist-header" aria-expanded="false" aria-controls="artist-content-8">
+                                <span>Bruno Mars</span>
+                                <span class="arrow" aria-hidden="true">▾</span>
+                            </button>
+                            <img src="images/unknown-artist-default-32px.jpg" alt="Bruno Mars profile photo"
+                                class="artist-img-modal" tabindex="0" role="button"
+                                aria-label="View Bruno Mars profile photo in full size">
+                            <div class="artist-content" id="artist-content-8">
+                                <div class="artist-meta">
+                                    Multi-talented performer blending pop, funk, and R&B with chart-toppers like "Just
+                                    the Way You Are" and "Uptown Funk."
+                                </div>
+                                <div class="buttons">
+                                    <a href="https://en.wikipedia.org/wiki/Bruno_Mars" target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="Read about Bruno Mars on Wikipedia (opens in new tab)">Wiki</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <!-- 2000s Decade -->
+                <div class="decade" role="article">
+                    <button class="decade-header" aria-expanded="false" aria-controls="decade-2000s">
+                        <span>2000s</span>
+                        <span class="arrow" aria-hidden="true">▾</span>
+                    </button>
+                    <div class="decade-content" id="decade-2000s">
+                        <div class="artist" role="article">
+                            <button class="artist-header" aria-expanded="false" aria-controls="artist-content-2">
+                                <span>ROBLOX Hater 9000</span>
+                                <span class="arrow" aria-hidden="true">▾</span>
+                            </button>
+                            <img src="images/robloxhater9000/profile-photo.jpg" alt="ROBLOX Hater 9000 profile photo"
+                                class="artist-img-modal" tabindex="0" role="button"
+                                aria-label="View ROBLOX Hater 9000 profile photo in full size">
+                            <div class="artist-content" id="artist-content-2">
+                                <div class="artist-meta">
+                                    Internet personality known for satirical content and meme music during the early
+                                    internet era.
+                                </div>
+                                <div class="buttons">
+                                    <button onclick="playArtist(this, 'audio/robloxhater9000/roblox-hate.mp3')"
+                                        aria-label="Play Roblox Hate by ROBLOX Hater 9000">Roblox Hate</button>
+                                    <button onclick="playArtist(this, 'audio/robloxhater9000/raining-tacos.mp3')"
+                                        aria-label="Play Raining Tacos by ROBLOX Hater 9000">Raining Tacos</button>
+                                    <a href="https://en.wikipedia.org/wiki/Rage-baiting" target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="Read about rage-baiting on Wikipedia (opens in new tab)">Wiki</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="artist" role="article">
+                            <button class="artist-header" aria-expanded="false" aria-controls="artist-content-4">
+                                <span>Eminem</span>
+                                <span class="arrow" aria-hidden="true">▾</span>
+                            </button>
+                            <img src="images/unknown-artist-default-32px.jpg" alt="Eminem profile photo"
+                                class="artist-img-modal" tabindex="0" role="button"
+                                aria-label="View Eminem profile photo in full size">
+                            <div class="artist-content" id="artist-content-4">
+                                <div class="artist-meta">
+                                    Legendary rapper who dominated the 2000s with albums like "The Eminem Show" and "The
+                                    Marshall Mathers LP."
+                                </div>
+                                <div class="buttons">
+                                    <a href="https://en.wikipedia.org/wiki/Eminem" target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="Read about Eminem on Wikipedia (opens in new tab)">Wiki</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="artist" role="article">
+                            <button class="artist-header" aria-expanded="false" aria-controls="artist-content-5">
+                                <span>Avril Lavigne</span>
+                                <span class="arrow" aria-hidden="true">▾</span>
+                            </button>
+                            <img src="images/unknown-artist-default-32px.jpg" alt="Avril Lavigne profile photo"
+                                class="artist-img-modal" tabindex="0" role="button"
+                                aria-label="View Avril Lavigne profile photo in full size">
+                            <div class="artist-content" id="artist-content-5">
+                                <div class="artist-meta">
+                                    Pop-punk princess who defined early 2000s youth culture with "Complicated" and
+                                    "Sk8er Boi."
+                                </div>
+                                <div class="buttons">
+                                    <a href="https://en.wikipedia.org/wiki/Avril_Lavigne" target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="Read about Avril Lavigne on Wikipedia (opens in new tab)">Wiki</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1990s Decade -->
+                <div class="decade" role="article">
+                    <button class="decade-header" aria-expanded="false" aria-controls="decade-1990s">
+                        <span>1990s</span>
+                        <span class="arrow" aria-hidden="true">▾</span>
+                    </button>
+                    <div class="decade-content" id="decade-1990s">
+                        <div class="artist" role="article">
+                            <button class="artist-header" aria-expanded="false" aria-controls="artist-content-3">
+                                <span>Backstreet Boys</span>
+                                <span class="arrow" aria-hidden="true">▾</span>
+                            </button>
+                            <img src="images/unknown-artist-default-32px.jpg" alt="Backstreet Boys profile photo"
+                                class="artist-img-modal" tabindex="0" role="button"
+                                aria-label="View Backstreet Boys profile photo in full size">
+                            <div class="artist-content" id="artist-content-3">
+                                <div class="artist-meta">
+                                    Iconic boy band that defined 90s pop music with hits like "I Want It That Way" and
+                                    sold over 100 million records worldwide.
+                                </div>
+                                <div class="buttons">
+                                    <a href="https://en.wikipedia.org/wiki/Backstreet_Boys" target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="Read about Backstreet Boys on Wikipedia (opens in new tab)">Wiki</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="artist" role="article">
+                            <button class="artist-header" aria-expanded="false" aria-controls="artist-content-9">
+                                <span>Spice Girls</span>
+                                <span class="arrow" aria-hidden="true">▾</span>
+                            </button>
+                            <img src="images/unknown-artist-default-32px.jpg" alt="Spice Girls profile photo"
+                                class="artist-img-modal" tabindex="0" role="button"
+                                aria-label="View Spice Girls profile photo in full size">
+                            <div class="artist-content" id="artist-content-9">
+                                <div class="artist-meta">
+                                    British girl group phenomenon that swept the world with "Wannabe" and became
+                                    cultural icons promoting girl power.
+                                </div>
+                                <div class="buttons">
+                                    <a href="https://en.wikipedia.org/wiki/Spice_Girls" target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="Read about Spice Girls on Wikipedia (opens in new tab)">Wiki</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="artist" role="article">
+                            <button class="artist-header" aria-expanded="false" aria-controls="artist-content-6">
+                                <span>Nirvana</span>
+                                <span class="arrow" aria-hidden="true">▾</span>
+                            </button>
+                            <img src="images/unknown-artist-default-32px.jpg" alt="Nirvana profile photo"
+                                class="artist-img-modal" tabindex="0" role="button"
+                                aria-label="View Nirvana profile photo in full size">
+                            <div class="artist-content" id="artist-content-6">
+                                <div class="artist-meta">
+                                    Grunge pioneers led by Kurt Cobain who revolutionized rock music with "Smells Like
+                                    Teen Spirit" and defined Generation X.
+                                </div>
+                                <div class="buttons">
+                                    <a href="https://en.wikipedia.org/wiki/Nirvana_(band)" target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="Read about Nirvana on Wikipedia (opens in new tab)">Wiki</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-        </div>
+        </main>
     </div>
 
-    <div class="player">
+    <aside class="player" role="complementary" aria-label="Audio player">
         <div style="display:flex;align-items:center;gap:16px;width:100%;">
-            <button id="playPauseBtn"
+            <button id="playPauseBtn" aria-label="Play or pause track"
                 style="background:none;border:none;padding:0;cursor:pointer;display:flex;align-items:center;">
-                <img id="playPauseIcon" src="icons/solid/play-circle.svg" alt="Play">
+                <img id="playPauseIcon" src="icons/solid/play-circle.svg" alt="" aria-hidden="true">
             </button>
-            <span id="trackLabel" style="font-size:12px;color:#eee;white-space:nowrap;">
-                Title<!--hey siri, play me some of that jumping music-->
+            <span id="trackLabel" style="font-size:12px;color:#eee;white-space:nowrap;" aria-live="polite">
+                Title
             </span>
-            <span id="currentTime" style="font-size:11px;color:#eee;white-space:nowrap;">
+            <span id="currentTime" style="font-size:11px;color:#eee;white-space:nowrap;" aria-label="Current time">
                 0:00
             </span>
-            <input id="progress" type="range" min="0" step="any" value="0" style="flex:1;">
-            <span id="duration" style="font-size:11px;color:#eee;white-space:nowrap;">
+            <input id="progress" type="range" min="0" step="any" value="0" style="flex:1;"
+                aria-label="Seek through track">
+            <span id="duration" style="font-size:11px;color:#eee;white-space:nowrap;" aria-label="Total duration">
                 0:00
             </span>
-            <input id="volume" type="range" min="0" max="1" step="0.01" value="1" style="width:73px;">
+            <input id="volume" type="range" min="0" max="1" step="0.01" value="1" style="width:73px;"
+                aria-label="Volume control">
         </div>
-        <audio id="audio"></audio>
-    </div>
+        <audio id="audio" aria-label="Audio player element"></audio>
+    </aside>
 </body>
 
 </html>

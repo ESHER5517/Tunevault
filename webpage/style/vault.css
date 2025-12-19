@@ -1,3 +1,35 @@
+/* Retro Styling */
+:root {
+    --retro-cyan: #0ff;
+    --retro-magenta: #f0f;
+    --retro-yellow: #ff0;
+    --retro-green: #0f0;
+    --retro-orange: #f90;
+}
+
+body {
+    background: #000814;
+    position: relative;
+}
+
+/* Retro scan lines effect */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(0deg,
+            rgba(0, 0, 0, 0.15),
+            rgba(0, 0, 0, 0.15) 1px,
+            transparent 1px,
+            transparent 2px);
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.3;
+}
+
 .search {
     margin-top: clamp(72px, 14vw, 96px);
     margin-bottom: var(--space-md);
@@ -28,41 +60,157 @@
 .search input {
     width: 100%;
     padding: var(--space-sm) var(--space-sm) var(--space-sm) 42px;
-    background: #122;
+    background: #000;
     border-radius: var(--radius-md);
-    border: none;
-    color: #fff;
+    border: 2px solid var(--retro-cyan);
+    color: var(--retro-cyan);
     font-size: clamp(14px, 3.5vw, 16px);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-family: 'Courier New', monospace;
+    box-shadow:
+        0 0 10px rgba(0, 255, 255, 0.5),
+        inset 0 0 10px rgba(0, 255, 255, 0.1);
+    text-shadow: 0 0 5px var(--retro-cyan);
+}
+
+.search input::placeholder {
+    color: rgba(0, 255, 255, 0.5);
+    text-shadow: none;
 }
 
 .search input:focus {
     outline: none;
+    border-color: var(--retro-magenta);
+    box-shadow:
+        0 0 20px rgba(255, 0, 255, 0.8),
+        inset 0 0 10px rgba(255, 0, 255, 0.2);
+    color: var(--retro-magenta);
+    text-shadow: 0 0 8px var(--retro-magenta);
 }
 
 .accordion {
     margin-top: var(--space-md);
 }
 
+/* Decade Accordion Styles */
+.decade {
+    background: #0a1a2a;
+    border-radius: var(--radius-lg);
+    padding: clamp(var(--space-md), 3vw, var(--space-lg));
+    margin-bottom: var(--space-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.decade-header {
+    font-size: clamp(20px, 4.5vw, 26px);
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    background: none;
+    border: none;
+    color: var(--retro-orange);
+    width: 100%;
+    text-align: left;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    font-family: 'Courier New', monospace;
+    margin-bottom: var(--space-sm);
+    text-shadow: 0 0 10px var(--retro-orange),
+        0 0 20px var(--retro-orange);
+    letter-spacing: 2px;
+}
+
+.decade-header:hover {
+    color: var(--retro-yellow);
+    text-shadow: 0 0 15px var(--retro-yellow),
+        0 0 30px var(--retro-yellow);
+    transform: translateX(5px);
+}
+
+.decade-header:focus {
+    outline: 2px solid #9cf;
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+.decade-header .arrow {
+    transition: transform 0.3s ease;
+    display: inline-block;
+    margin-left: 8px;
+}
+
+.decade.open .decade-header .arrow {
+    transform: rotate(180deg);
+}
+
+.decade-content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+}
+
+.decade.open .decade-content {
+    max-height: 2000px;
+    opacity: 1;
+    margin-top: var(--space-md);
+}
+
+/* Artist Accordion Styles (nested within decades) */
+
 .artist {
     background: #122;
     border-radius: var(--radius-lg);
     padding: clamp(var(--space-md), 3vw, var(--space-lg));
     margin-bottom: var(--space-md);
+    margin-top: var(--space-sm);
     position: relative;
     overflow: hidden;
 }
 
 .artist-header {
-    font-size: clamp(12px, 3vw, 14px);
+    font-size: clamp(18px, 4vw, 22px);
     font-weight: bold;
     cursor: pointer;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding-right: 72px;
+    user-select: none;
+    background: none;
+    border: none;
+    color: #fff;
+    width: 100%;
+    text-align: left;
+    padding: 0;
+    padding-right: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color 0.2s ease;
+    font-family: inherit;
+}
+
+.artist-header:hover {
+    color: #9cf;
+}
+
+.artist-header:focus {
+    outline: 2px solid #9cf;
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+.artist-header .arrow {
+    transition: transform 0.3s ease;
+    display: inline-block;
+    margin-left: 8px;
+}
+
+.artist.open .artist-header .arrow {
+    transform: rotate(180deg);
 }
 
 .artist-meta {
@@ -82,7 +230,7 @@
 
 .artist.open .artist-content {
     max-height: 500px;
-    opacity: 1;
+    opacity 1;
     margin-top: var(--space-md);
 }
 
@@ -96,8 +244,25 @@
     border-radius: 50%;
     object-fit: cover;
     filter: brightness(0.6);
-    pointer-events: none;
     border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.artist img:not(.artist-img-modal) {
+    pointer-events: none;
+}
+
+.artist-img-modal {
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: auto;
+}
+
+.artist-img-modal:hover,
+.artist-img-modal:focus {
+    opacity: 0.8;
+    transform: scale(1.05);
+    outline: 2px solid #9cf;
+    outline-offset: 2px;
 }
 
 .buttons {
