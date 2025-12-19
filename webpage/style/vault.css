@@ -48,11 +48,6 @@
     outline: none;
 }
 
-.search input:hover+.search-icon,
-.search input:focus+.search-icon {
-    opacity: 0.85;
-}
-
 .accordion {
     margin-top: 20px;
 }
