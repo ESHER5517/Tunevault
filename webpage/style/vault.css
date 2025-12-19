@@ -8,9 +8,26 @@
     font-size: 18px;
 }
 
+.search-field {
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    width: 16px;
+    height: 16px;
+    transform: translateY(-50%);
+    filter: invert(1);
+    opacity: 0.6;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+}
+
 .search input {
     width: 100%;
-    padding: 14px;
+    padding: 14px 14px 14px 42px;
     border: none;
     border-radius: 10px;
     background: #1c1c1c;
@@ -18,15 +35,22 @@
     font-size: 16px;
     box-sizing: border-box;
     caret-color: #fff;
+    transform: translateY(0);
     transition:
         background 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
-        transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+        transform 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+.search input:hover,
 .search input:focus {
-    outline: none;
     background: #222;
-    transform: translateY(-1px);
+    /*transform: translateY(-3px);*/
+    outline: none;
+}
+
+.search input:hover+.search-icon,
+.search input:focus+.search-icon {
+    opacity: 0.85;
 }
 
 .accordion {
@@ -39,6 +63,7 @@
     margin-bottom: 20px;
     background: #1c1c1c;
     border-radius: 14px;
+    transform: translateY(0);
     transition:
         transform 0.45s cubic-bezier(0.25, 0.8, 0.25, 1),
         background 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -50,26 +75,16 @@
 }
 
 .artist-header {
-    display: inline-flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
-    white-space: nowrap;
     font-size: 20px;
     font-weight: bold;
-    color: #fff;
     cursor: pointer;
-    background: transparent;
-    border: none;
-    padding: 0;
-    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .artist-header:hover {
-    opacity: 0.85;
-    transform: translateY(-2px);
+    opacity: 0.7;
+    transform: translateY(-1px);
 }
-
 
 .artist-meta {
     font-size: 15px;
@@ -117,6 +132,7 @@
     text-decoration: none;
     color: #fff;
     background: #2a2a2a;
+    transform: translateY(0);
     transition:
         background 0.3s ease,
         transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -185,8 +201,9 @@ input[type="range"]::-moz-range-thumb {
     height: 12px;
     background: #fff;
     border-radius: 50%;
-    cursor: pointer;
     border: none;
+    cursor: pointer;
+    transform: scale(1);
     transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
