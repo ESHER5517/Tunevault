@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Tunevault</title>
 
-    <link rel="icon" href="favicon.svg" sizes="any" type="image/svg+xml">
+    <link rel="icon" href="icons/favicon.svg" sizes="any" type="image/svg+xml">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <script src="js/vault.js" defer></script>
@@ -16,11 +16,26 @@
 </head>
 
 <body>
+    <!-- Skip navigation links for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#searchInput" class="skip-link">Skip to search</a>
+
+    <!-- Screen reader announcements -->
+    <div aria-live="polite" aria-atomic="true" class="visually-hidden" id="search-status"></div>
+
     <div class="container">
         <div id="imageModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-            <span class="modal-close" aria-label="Close modal">&times;</span>
-            <img class="modal-content" id="modalImage" alt="">
-            <div id="modalCaption"></div>
+            <div class="modal-content-wrapper">
+                <span class="modal-close" aria-label="Close modal">&times;</span>
+                <div class="modal-image-container">
+                    <img class="modal-content" id="modalImage" alt="">
+                </div>
+                <div class="modal-info">
+                    <h2 class="modal-title" id="modalTitle"></h2>
+                    <div class="modal-decade" id="modalDecade"></div>
+                    <div id="modalCaption"></div>
+                </div>
+            </div>
         </div>
 
         <div class="titlebar">

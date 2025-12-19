@@ -5,14 +5,19 @@
     <meta charset="UTF-8">
     <title>Tunevault</title>
 
-    <link rel="icon" href="favicon.svg" sizes="any" type="image/svg+xml">
+    <link rel="icon" href="icons/favicon.svg" sizes="any" type="image/svg+xml">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/global.css">
     <link rel="stylesheet" href="style/contact.css">
+
+    <script src="js/settings.js" defer></script>
 </head>
 
 <body>
+    <!-- Skip navigation link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to contact form</a>
+
     <div class="container">
         <div class="titlebar">
             <div class="nav">
@@ -31,39 +36,67 @@
             </div>
         </div>
 
-        <div class="panel">
-            <h2>Contact Form</h2>
+        <main id="main-content">
+            <div class="panel">
+                <h2>Contact Form</h2>
 
-            <label>Email</label>
-            <input type="email" placeholder="you@example.com">
+                <label>Email</label>
+                <input type="email" placeholder="you@example.com">
 
-            <label>Request Type</label>
-            <select>
-                <option>Artist Request</option>
-                <option>Copyright / DMCA</option>
-                <option>Support & Feedback</option>
-                <option>Other</option>
-            </select>
+                <label>Request Type</label>
+                <select>
+                    <option>Artist Request</option>
+                    <option>Copyright / DMCA</option>
+                    <option>Support & Feedback</option>
+                    <option>Other</option>
+                </select>
 
-            <label>Message</label>
-            <textarea placeholder="Enter your message..."></textarea>
+                <label>Message</label>
+                <textarea placeholder="Enter your message..."></textarea>
 
-            <button>Send Message</button>
-        </div>
-
-        <div class="panel">
-            <h2>Settings</h2>
-
-            <div class="settings-row">
-                <label>Default Volume</label>
-                <input type="range" min="0" max="100" value="80">
+                <button>Send Message</button>
             </div>
 
-            <div class="settings-row">
-                <label>Autoplay</label>
-                <input type="checkbox" checked>
+            <div class="panel">
+                <h2>Settings</h2>
+
+                <div class="settings-row">
+                    <label for="volume-setting">Default Volume</label>
+                    <input id="volume-setting" type="range" min="0" max="100" value="80">
+                    <span id="volume-value" class="settings-value">80%</span>
+                </div>
+
+                <div class="settings-row">
+                    <label for="autoplay-setting">Autoplay</label>
+                    <input id="autoplay-setting" type="checkbox" checked>
+                </div>
+
+                <div class="settings-row">
+                    <label for="contrast-setting">Increase Contrast</label>
+                    <input id="contrast-setting" type="range" min="0" max="100" value="0">
+                    <span id="contrast-value" class="settings-value">0%</span>
+                </div>
+
+                <div class="settings-row">
+                    <label for="scaling-setting">Item Scaling</label>
+                    <input id="scaling-setting" type="range" min="80" max="150" value="100">
+                    <span id="scaling-value" class="settings-value">100%</span>
+                </div>
+
+                <div class="settings-row">
+                    <label for="font-setting">Font Family</label>
+                    <select id="font-setting">
+                        <option value="default">Default (Segoe UI)</option>
+                        <option value="courier">Courier New (Monospace)</option>
+                        <option value="arial">Arial</option>
+                        <option value="georgia">Georgia (Serif)</option>
+                        <option value="verdana">Verdana</option>
+                        <option value="comic">Comic Sans MS</option>
+                    </select>
+                </div>
             </div>
-        </div>
+    </div>
+    </main>
     </div>
 
 </body>

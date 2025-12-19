@@ -3,15 +3,23 @@
     border-radius: var(--radius-lg);
     padding: 24px;
     margin-top: 80px;
+    border: 1px solid rgba(0, 255, 255, 0.2);
 }
 
 h2 {
     margin-top: 0;
+    color: var(--retro-orange);
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 8px var(--retro-orange);
+    letter-spacing: 1px;
 }
 
 label {
     display: block;
     margin: 14px 0 6px;
+    color: var(--retro-cyan);
+    font-size: 14px;
+    font-family: 'Courier New', monospace;
 }
 
 input,
@@ -19,11 +27,22 @@ textarea,
 select {
     width: 100%;
     padding: 12px;
-    background: #1a1a1a;
+    background: #000;
     border-radius: 8px;
-    border: none;
+    border: 2px solid var(--retro-cyan);
     color: #fff;
     font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--retro-magenta);
+    box-shadow:
+        0 0 15px rgba(255, 0, 255, 0.6),
+        inset 0 0 8px rgba(255, 0, 255, 0.2);
 }
 
 textarea {
@@ -40,6 +59,16 @@ button {
     color: #fff;
     font-weight: bold;
     cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid var(--retro-cyan);
+}
+
+button:hover,
+button:focus {
+    background: #155;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+    transform: translateY(-2px);
+    outline: none;
 }
 
 .settings-row {
@@ -47,4 +76,32 @@ button {
     align-items: center;
     gap: 16px;
     margin-top: 12px;
+}
+
+.settings-row label {
+    margin: 0;
+    min-width: 140px;
+}
+
+.settings-row input[type="checkbox"] {
+    width: auto;
+    cursor: pointer;
+}
+
+.settings-row input[type="range"] {
+    flex: 1;
+    min-width: 120px;
+}
+
+.settings-row select {
+    flex: 1;
+    min-width: 180px;
+}
+
+.settings-value {
+    min-width: 50px;
+    text-align: right;
+    color: var(--retro-cyan);
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
 }

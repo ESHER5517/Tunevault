@@ -5,14 +5,18 @@
     <meta charset="UTF-8">
     <title>Tunevault</title>
 
-    <link rel="icon" href="favicon.svg" sizes="any" type="image/svg+xml">
+    <link rel="icon" href="icons/favicon.svg" sizes="any" type="image/svg+xml">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/global.css">
     <link rel="stylesheet" href="style/index.css">
+
+    <script src="js/settings.js" defer></script>
 </head>
 
 <body>
+    <!-- Skip navigation link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <div class="container">
         <div class="titlebar">
@@ -32,47 +36,52 @@
             </div>
         </div>
 
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Preserving music. One artist at a time.</h1>
-                <p>
-                    MuseVault is a curated archive for discovering, cataloguing, and listening to artists across genres.
-                    Explore artist profiles, play tracks directly in-browser, and manage your listening experience in
-                    one
-                    place.
-                </p>
+        <main id="main-content">
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Preserving music. One artist at a time.</h1>
+                    <p>
+                        MuseVault is a curated archive for discovering, cataloguing, and listening to artists across
+                        genres.
+                        Explore artist profiles, play tracks directly in-browser, and manage your listening experience
+                        in
+                        one
+                        place.
+                    </p>
 
-                <div class="actions">
-                    <a href="vault.html">Begin Listening</a>
-                    <a href="contact.html">Contact Us</a>
+                    <div class="actions">
+                        <a href="vault.html">Begin Listening</a>
+                        <a href="contact.html">Contact Us</a>
+                    </div>
                 </div>
-            </div>
 
-            <div class="hero-media">
-                <video src="videos/onboarding.mp4" autoplay muted loop playsinline>
-                </video>
-            </div>
-        </section>
-
+                <div class="hero-media">
+                    <video src="videos/onboarding.mp4" autoplay muted loop playsinline controls>
+                    </video>
+                </div>
+            </section>
 
 
-        <!-- Features -->
-        <section class="features">
-            <div class="feature">
-                <h3>Artist Vault</h3>
-                <p>Browse artists using an expandable accordion layout with metadata, descriptions, and playback.</p>
-            </div>
 
-            <div class="feature">
-                <h3>Built-in Player</h3>
-                <p>Play tracks directly from the site with persistent playback controls.</p>
-            </div>
+            <!-- Features -->
+            <section class="features">
+                <div class="feature">
+                    <h3>Artist Vault</h3>
+                    <p>Browse artists using an expandable accordion layout with metadata, descriptions, and playback.
+                    </p>
+                </div>
 
-            <div class="feature">
-                <h3>Clean UI</h3>
-                <p>Minimal, dark-mode-first interface designed for focus and accessibility.</p>
-            </div>
-        </section>
+                <div class="feature">
+                    <h3>Built-in Player</h3>
+                    <p>Play tracks directly from the site with persistent playback controls.</p>
+                </div>
+
+                <div class="feature">
+                    <h3>Clean UI</h3>
+                    <p>Minimal, dark-mode-first interface designed for focus and accessibility.</p>
+                </div>
+            </section>
+        </main>
 
     </div>
 

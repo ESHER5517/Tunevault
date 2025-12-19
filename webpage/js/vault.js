@@ -9,7 +9,11 @@ const durationEl = $('duration');
 const progressBar = $('progress');
 const volumeBar = $('volume');
 const searchInput = $('searchInput');
+const searchStatus = $('search-status');
 const player = document.querySelector('.player');
+
+// Store last focused element for modal focus management
+let lastFocusedElement = null;
 
 // Decade accordion functionality
 document.querySelectorAll('.decade-header').forEach(header => {
@@ -55,16 +59,52 @@ document.querySelectorAll('.artist-header').forEach(header => {
 const modal = document.getElementById('imageModal');
 const modalImg = document.getElementById('modalImage');
 const modalCaption = document.getElementById('modalCaption');
+const modalTitle = document.getElementById('modalTitle');
+const modalDecade = document.getElementById('modalDecade');
 const closeModal = document.querySelector('.modal-close');
+const modalWrapper = document.querySelector('.modal-content-wrapper');
+
+// Get all focusable elements in modal
+const getFocusableElements = () => {
+    return modalWrapper.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+};
 
 document.querySelectorAll('.artist-img-modal').forEach(img => {
     const openModalHandler = () => {
+        // Store last focused element
+        lastFocusedElement = document.activeElement;
+
         modal.classList.add('show');
         modalImg.src = img.src;
-        modalCaption.textContent = img.alt;
+        modalImg.alt = img.alt;
+
+        // Get artist information from the parent artist card
+        const artistCard = img.closest('.artist');
+        const artistHeader = artistCard ? artistCard.querySelector('.artist-header span:first-child') : null;
+        const artistMeta = artistCard ? artistCard.querySelector('.artist-meta') : null;
+        const decadeCard = artistCard ? artistCard.closest('.decade') : null;
+        const decadeHeader = decadeCard ? decadeCard.querySelector('.decade-header span:first-child') : null;
+
+        // Populate modal with artist data
+        if (modalTitle && artistHeader) {
+            modalTitle.textContent = artistHeader.textContent;
+        }
+
+        if (modalDecade && decadeHeader) {
+            modalDecade.textContent = decadeHeader.textContent;
+        }
+
+        if (modalCaption && artistMeta) {
+            modalCaption.textContent = artistMeta.textContent.trim();
+        } else if (modalCaption) {
+            modalCaption.textContent = img.alt;
+        }
+
         document.body.style.overflow = 'hidden'; // Prevent background scroll
 
-        // Focus trap - focus close button
+        // Focus close button
         closeModal.focus();
     };
 
@@ -83,6 +123,12 @@ document.querySelectorAll('.artist-img-modal').forEach(img => {
 const closeModalHandler = () => {
     modal.classList.remove('show');
     document.body.style.overflow = ''; // Restore scroll
+
+    // Return focus to last focused element
+    if (lastFocusedElement) {
+        lastFocusedElement.focus();
+        lastFocusedElement = null;
+    }
 };
 
 closeModal.addEventListener('click', closeModalHandler);
@@ -94,10 +140,36 @@ modal.addEventListener('click', (e) => {
     }
 });
 
-// Close on Escape key
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('show')) {
+// Focus trap for modal
+modal.addEventListener('keydown', (e) => {
+    if (!modal.classList.contains('show')) return;
+
+    // Close on Escape key
+    if (e.key === 'Escape') {
         closeModalHandler();
+        return;
+    }
+
+    // Trap Tab key
+    if (e.key === 'Tab') {
+        const focusableElements = Array.from(getFocusableElements());
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        // Shift + Tab
+        if (e.shiftKey) {
+            if (document.activeElement === firstElement) {
+                e.preventDefault();
+                lastElement.focus();
+            }
+        }
+        // Tab
+        else {
+            if (document.activeElement === lastElement) {
+                e.preventDefault();
+                firstElement.focus();
+            }
+        }
     }
 });
 
@@ -151,6 +223,8 @@ audio.addEventListener('ended', () => {
 
 searchInput.addEventListener('input', () => {
     const filter = searchInput.value.toLowerCase();
+    let visibleArtistsCount = 0;
+    let visibleDecadesCount = 0;
 
     document.querySelectorAll('.decade').forEach(decade => {
         // Get decade name from the first span in decade-header
@@ -169,11 +243,16 @@ searchInput.addEventListener('input', () => {
             // Show artist if it matches OR if the decade category matches
             const shouldShow = artistMatches || decadeMatches || filter === '';
             artist.style.display = shouldShow ? '' : 'none';
-            if (shouldShow) hasVisibleArtist = true;
+            if (shouldShow) {
+                hasVisibleArtist = true;
+                visibleArtistsCount++;
+            }
         });
 
         // Show decade if it contains matching artists or matches itself
-        decade.style.display = (hasVisibleArtist || filter === '') ? '' : 'none';
+        const shouldShowDecade = (hasVisibleArtist || filter === '');
+        decade.style.display = shouldShowDecade ? '' : 'none';
+        if (shouldShowDecade) visibleDecadesCount++;
 
         // Auto-expand decade if searching and it has matches
         if (filter !== '' && hasVisibleArtist) {
@@ -182,6 +261,17 @@ searchInput.addEventListener('input', () => {
             if (header) header.setAttribute('aria-expanded', 'true');
         }
     });
+
+    // Announce search results to screen readers
+    if (searchStatus) {
+        if (filter === '') {
+            searchStatus.textContent = '';
+        } else if (visibleArtistsCount === 0) {
+            searchStatus.textContent = 'No artists found matching your search.';
+        } else {
+            searchStatus.textContent = `Found ${visibleArtistsCount} ${visibleArtistsCount === 1 ? 'artist' : 'artists'} in ${visibleDecadesCount} ${visibleDecadesCount === 1 ? 'decade' : 'decades'}.`;
+        }
+    }
 });
 
 function updateRange(range) {
