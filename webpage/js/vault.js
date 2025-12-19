@@ -1,4 +1,4 @@
-const $ = id => document.getElementById(id);
+const $ = id => document.getElementById(id); // saw it on stackoverflow, lwk genius.
 
 const audio = $('audio');
 const playPauseButton = $('playPauseBtn');
