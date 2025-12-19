@@ -17,9 +17,10 @@
     color: #fff;
     font-size: 16px;
     box-sizing: border-box;
+    caret-color: #fff;
     transition:
-        background 0.25s ease,
-        transform 0.2s ease;
+        background 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+        transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .search input:focus {
@@ -39,25 +40,36 @@
     background: #1c1c1c;
     border-radius: 14px;
     transition:
-        transform 0.25s ease,
-        background 0.25s ease;
+        transform 0.45s cubic-bezier(0.25, 0.8, 0.25, 1),
+        background 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .artist:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
     background: #202020;
 }
 
 .artist-header {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    white-space: nowrap;
     font-size: 20px;
     font-weight: bold;
+    color: #fff;
     cursor: pointer;
-    transition: opacity 0.2s ease;
+    background: transparent;
+    border: none;
+    padding: 0;
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .artist-header:hover {
     opacity: 0.85;
+    transform: translateY(-2px);
 }
+
 
 .artist-meta {
     font-size: 15px;
@@ -76,12 +88,12 @@
     position: absolute;
     right: 10px;
     top: 50%;
-    transform: translateY(-50%) scale(0.98);
     height: 80%;
     border-radius: 50%;
     filter: brightness(0.6);
     pointer-events: none;
-    transition: transform 0.25s ease;
+    transform: translateY(-50%) scale(0.96);
+    transition: transform 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .artist:hover img {
@@ -100,13 +112,14 @@
     border-radius: 8px;
     font-size: 16px;
     line-height: 1;
-    color: #fff;
+    font-family: inherit;
     cursor: pointer;
     text-decoration: none;
+    color: #fff;
     background: #2a2a2a;
     transition:
-        background 0.2s ease,
-        transform 0.15s ease;
+        background 0.3s ease,
+        transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .buttons button {
@@ -115,8 +128,8 @@
 
 .buttons button:hover,
 .buttons a:hover {
-    transform: translateY(-1px);
     background: #3b3b3b;
+    transform: translateY(-1px);
 }
 
 .buttons button:active,
@@ -128,7 +141,6 @@
     position: fixed;
     bottom: 20px;
     left: 50%;
-    transform: translateX(-50%) translateY(6px);
     width: 90%;
     padding: 15px;
     display: flex;
@@ -138,9 +150,10 @@
     border-radius: 14px;
     opacity: 0;
     pointer-events: none;
+    transform: translateX(-50%) translateY(12px);
     transition:
-        opacity 0.25s ease,
-        transform 0.25s ease;
+        opacity 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+        transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .player.visible {
@@ -156,27 +169,28 @@ input[type="range"] {
     background: linear-gradient(to right,
             #fff 0%,
             #fff var(--progress, 0%),
-            #3b3b3b var(--progress, 0%),
-            #3b3b3b 100%);
+            #2a2a2a var(--progress, 0%),
+            #2a2a2a 100%);
     outline: none;
-    transition: filter 0.2s ease;
+    transition: filter 0.3s ease;
 }
 
 input[type="range"]:hover {
-    filter: brightness(1.15);
+    filter: brightness(1.2);
 }
 
 input[type="range"]::-webkit-slider-thumb,
 input[type="range"]::-moz-range-thumb {
     width: 12px;
     height: 12px;
-    background: #eee;
+    background: #fff;
     border-radius: 50%;
     cursor: pointer;
-    transition: transform 0.15s ease;
+    border: none;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 input[type="range"]:active::-webkit-slider-thumb,
 input[type="range"]:active::-moz-range-thumb {
-    transform: scale(1.15);
+    transform: scale(1.25);
 }
