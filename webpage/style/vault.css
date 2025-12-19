@@ -9,14 +9,23 @@
 }
 
 .search input {
-    background: #1c1c1c;
-    color: #fff;
     width: 100%;
     padding: 14px;
-    border-radius: 10px;
     border: none;
+    border-radius: 10px;
+    background: #1c1c1c;
+    color: #fff;
     font-size: 16px;
     box-sizing: border-box;
+    transition:
+        background 0.25s ease,
+        transform 0.2s ease;
+}
+
+.search input:focus {
+    outline: none;
+    background: #222;
+    transform: translateY(-1px);
 }
 
 .accordion {
@@ -24,17 +33,30 @@
 }
 
 .artist {
+    position: relative;
+    padding: 20px;
+    margin-bottom: 20px;
     background: #1c1c1c;
     border-radius: 14px;
-    margin-bottom: 20px;
-    padding: 20px;
-    position: relative;
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease;
+}
+
+.artist:hover {
+    transform: translateY(-2px);
+    background: #202020;
 }
 
 .artist-header {
-    cursor: pointer;
     font-size: 20px;
     font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.artist-header:hover {
+    opacity: 0.85;
 }
 
 .artist-meta {
@@ -48,20 +70,22 @@
     display: none;
     margin-top: 14px;
     padding-top: 14px;
-    overflow: hidden;
 }
 
 .artist img {
     position: absolute;
     right: 10px;
     top: 50%;
-    transform: translateY(-50%);
-    width: max-content;
+    transform: translateY(-50%) scale(0.98);
     height: 80%;
-    object-fit: contain;
-    pointer-events: none;
+    border-radius: 50%;
     filter: brightness(0.6);
-    border-radius: 100%;
+    pointer-events: none;
+    transition: transform 0.25s ease;
+}
+
+.artist:hover img {
+    transform: translateY(-50%) scale(1);
 }
 
 .buttons {
@@ -71,61 +95,61 @@
 .buttons button,
 .buttons a {
     padding: 10px 16px;
-    border-radius: 8px;
-    border: none;
     margin-right: 10px;
-    cursor: pointer;
-    font-weight: normal;
-    color: #fff;
-    text-decoration: none;
-    transition: background 0.2s ease;
-    font-family: inherit;
+    border: none;
+    border-radius: 8px;
     font-size: 16px;
     line-height: 1;
-    appearance: none;
-    -webkit-appearance: none;
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+    background: #2a2a2a;
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease;
 }
 
 .buttons button {
     background: #b300ff;
 }
 
-.buttons a {
-    background: #2a2a2a;
-}
-
+.buttons button:hover,
 .buttons a:hover {
+    transform: translateY(-1px);
     background: #3b3b3b;
 }
 
-.buttons button:hover {
-    background: #2a2a2a;
+.buttons button:active,
+.buttons a:active {
+    transform: translateY(0);
 }
 
 .player {
     position: fixed;
     bottom: 20px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(6px);
     width: 90%;
-    background: #1c1c1c;
     padding: 15px;
-    border-radius: 14px;
     display: flex;
     align-items: center;
     gap: 20px;
+    background: #1c1c1c;
+    border-radius: 14px;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.25s ease;
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
 }
 
 .player.visible {
     opacity: 1;
     pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
 }
 
 input[type="range"] {
-    -webkit-appearance: none;
     appearance: none;
     height: 6px;
     border-radius: 999px;
@@ -135,21 +159,24 @@ input[type="range"] {
             #3b3b3b var(--progress, 0%),
             #3b3b3b 100%);
     outline: none;
+    transition: filter 0.2s ease;
 }
 
-input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 12px;
-    height: 12px;
-    background: #eee;
-    border-radius: 50%;
-    cursor: pointer;
+input[type="range"]:hover {
+    filter: brightness(1.15);
 }
 
+input[type="range"]::-webkit-slider-thumb,
 input[type="range"]::-moz-range-thumb {
     width: 12px;
     height: 12px;
     background: #eee;
     border-radius: 50%;
     cursor: pointer;
+    transition: transform 0.15s ease;
+}
+
+input[type="range"]:active::-webkit-slider-thumb,
+input[type="range"]:active::-moz-range-thumb {
+    transform: scale(1.15);
 }
