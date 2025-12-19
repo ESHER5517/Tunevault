@@ -1,5 +1,5 @@
 .search {
-    margin: 40px 0 12px;
+    margin: 6% 0 12px;
 }
 
 .search label {
@@ -30,7 +30,7 @@
     padding: 12px 12px 12px 42px;
     border: none;
     border-radius: 10px;
-    background: #1c1c1c;
+    background: #122;
     color: #fff;
     font-size: 16px;
     box-sizing: border-box;
@@ -43,7 +43,8 @@
 
 .search input:hover,
 .search input:focus {
-    background: #222;
+    background: rgb(13, 41, 41);
+    ;
     /*transform: translateY(-3px);*/
     outline: none;
 }
@@ -56,7 +57,7 @@
     position: relative;
     padding: 12px;
     margin-bottom: 12px;
-    background: #1c1c1c;
+    background: #122;
     border-radius: 12px;
     transform: translateY(0);
     transition:
@@ -65,7 +66,7 @@
 }
 
 .artist:hover {
-    background: #222;
+    background: #122;
 }
 
 .artist-header {
@@ -78,12 +79,23 @@
 .artist-meta {
     font-size: 15px;
     color: #bbb;
-    margin-bottom: 12px;
-    letter-spacing: 0.3px;
+    margin-top: -12px;
 }
 
 .artist-content {
-    display: none;
+    display: block;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition:
+        opacity 0.2s ease,
+        margin-top 0.2s ease,
+        padding-top 0.2s ease;
+}
+
+.artist.open .artist-content {
+    max-height: 500px;
+    opacity: 1;
     margin-top: 12px;
     padding-top: 12px;
 }
@@ -120,7 +132,7 @@
     cursor: pointer;
     text-decoration: none;
     color: #fff;
-    background: #2a2a2a;
+    background: #121212;
     transform: translateY(0);
     transition:
         background 0.3s ease,
@@ -128,13 +140,12 @@
 }
 
 .buttons button {
-    background: #b300ff;
+    background: #133;
 }
 
 .buttons button:hover,
 .buttons a:hover {
-    background: #3b3b3b;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
 }
 
 .buttons button:active,

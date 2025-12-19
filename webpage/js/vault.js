@@ -13,21 +13,21 @@ const player = document.querySelector('.player');
 
 document.querySelectorAll('.artist-header').forEach(header => {
     header.addEventListener('click', () => {
-        const content = header.closest('.artist').querySelector('.artist-content');
-        content.style.display = content.style.display === 'block' ? 'none' : 'block';
+        const artist = header.closest('.artist');
+        artist.classList.toggle('open');
     });
 });
 
-function playArtist(button) {
-    const artist = button.closest('.artist');
-    const audioSource = artist.dataset.audio;
+function playArtist(button, audioSource) {
+    if (!audioSource) return;
 
     if (audio.src !== audioSource) {
         audio.src = audioSource;
     }
 
     audio.play();
-    trackLabel.textContent = audioSource.split('/').pop();
+
+    trackLabel.textContent = button.textContent.trim();
     playPauseIcon.src = 'icons/solid/pause-circle.svg';
     player.classList.add('visible');
 }
